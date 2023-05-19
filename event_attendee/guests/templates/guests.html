@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block title %}Check-in{% endblock %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'client.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container h-100 d-flex justify-content-center">
+    <div class=" my-auto">
+      <!-- <h1 class="display-3">Hello, world!</h1> -->
+      <div class="card border my-5 rounded mx-5 ">
+          <div class="card-header l-bg-blue-dark">
+              <h1 class="card-title mx-5 mt-2">WELCOME!</h1>
+              <p class="mx-5 mt-2">Please input phone number below to check-in!</p>
+        </div>
+        <!-- <span class="header-line gradient-color-1"></span> -->
+        <div class="card-body mx-5">
+            <form action="" method="post" enctype="multipart/form-data">
+                <!-- <input type="submit" value="Submit"> -->
+                <!-- {% for msg in msg %}
+                    {{msg.tags}}
+                {% endfor %} -->
+                {% bootstrap_form form %}
+                {% csrf_token %}
+                <div class="row border-top">
+                    <div class="d-flex justify-content-center align-items-center mt-3">
+                        <button type="submit" class="btn l-bg-blue-dark-reverse mt-1">Submit</button>
+                    </div>
+                </div>
+            </form>
+    
+        </div>
+    </div>
+    </div>
+ </div>
+{% endblock %}
