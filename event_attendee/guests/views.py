@@ -105,5 +105,5 @@ def check_validate(request):
                 print("Not Match")
                 return render(request, 'guests.html', {"form": form, "msg":msg})
         # else:
-        #     return render(request, "guests.html", {"form": form})
+        #     raise ValidationError("Character not allowed")
     return render(request, "guests.html", {"form": form})

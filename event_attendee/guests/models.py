@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.validators import RegexValidator
+from django.forms import ValidationError
 # Create your models here.
 
 class Csv(models.Model):
@@ -14,11 +16,14 @@ class Guest(models.Model):
     phone_number = models.CharField()
 
 class UpcomingInput(models.Model):
+    def only_int(value): 
+        if value.isdigit()==False:
+            raise ValidationError('Field contains character! Only numbers are allowed!')
     STATUS = (
         (1, 'Coming'),
         (2, 'Not Coming'),
     )
-    phone_number = models.CharField() #Using Regex to validate only integer
+    phone_number = models.CharField(validators=[only_int], ) #Using Regex to validate only integer
     timestamps = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS,default=2,)
     # status = 
