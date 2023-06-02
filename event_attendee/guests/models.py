@@ -26,4 +26,5 @@ class UpcomingInput(models.Model):
     phone_number = models.CharField(validators=[only_int], ) #Using Regex to validate only integer
     timestamps = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS,default=2,)
+    incoming_timestamps = models.DateTimeField(null=True, default=None)
     # status = 

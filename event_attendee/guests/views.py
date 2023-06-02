@@ -4,8 +4,10 @@ from django.http import Http404, HttpResponse, HttpResponseNotFound, HttpRespons
 from django.core.paginator import Paginator
 from django.contrib import messages
 from .form import EntryForm, AdminForm
+from django.db.models.functions import Now
 import csv
 from .models import *
+from datetime import datetime
 
 # Views of Guest list
 def guests_list_view(request):
@@ -96,14 +98,17 @@ def check_validate(request):
 
                 # WRITE DATA TO UPCOMINGINPUT MODEL, STATUS=1 MEAN USER IS COMING TO THE EVENT
                 msg = messages.success(request,"You're invited! Data match in invitation list")
-                UpcomingInput.objects.filter(phone_number = int(new_number)).update(status=1)
+                # UpcomingInput.objects.filter(phone_number = int(new_number)).update(status=1)
+                UpcomingInput.objects.filter(phone_number = int(new_number)).update(status=1, incoming_timestamps = datetime.now())
 
-                return render(request, 'guests.html', {"form": form, "data": data, "msg":msg})
+                return render(request, 'access_granted.html', {"form": form, "data": data, "msg":msg})
             # HANDLE ERROR IF DATA DOESN'T EXIST
             except Guest.DoesNotExist:
                 msg = messages.error(request,"Sorry phone number does not match data in invitation list! Please contact an administrator near you!")
                 print("Not Match")
-                return render(request, 'guests.html', {"form": form, "msg":msg})
+                return render(request, 'access_denied.html', {"form": form, "msg":msg})
         # else:
         #     raise ValidationError("Character not allowed")
     return render(request, "guests.html", {"form": form})
+    
+    
