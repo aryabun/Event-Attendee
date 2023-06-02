@@ -4,6 +4,7 @@ from django.http import Http404, HttpResponse, HttpResponseNotFound, HttpRespons
 from django.core.paginator import Paginator
 from django.contrib import messages
 from .form import EntryForm, AdminForm
+from django.db.models.functions import Now
 import csv
 from .models import *
 
@@ -96,7 +97,9 @@ def check_validate(request):
 
                 # WRITE DATA TO UPCOMINGINPUT MODEL, STATUS=1 MEAN USER IS COMING TO THE EVENT
                 msg = messages.success(request,"You're invited! Data match in invitation list")
+                
                 UpcomingInput.objects.filter(phone_number = int(new_number)).update(status=1)
+                # UpcomingInput.objects.filter(phone_number = int(new_number)).update(timestamps = Now())
 
                 return render(request, 'access_granted.html', {"form": form, "data": data, "msg":msg})
             # HANDLE ERROR IF DATA DOESN'T EXIST
@@ -107,4 +110,5 @@ def check_validate(request):
         # else:
         #     raise ValidationError("Character not allowed")
     return render(request, "guests.html", {"form": form})
+    
     

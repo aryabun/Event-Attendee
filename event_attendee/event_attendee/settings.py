@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'event_attendee.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'RMAC_EVENT',
+        'NAME': 'RMAC_EVENT_3',
         'USER': 'odoo15',
         'PASSWORD': 'odoo15',
         'HOST': 'localhost',
