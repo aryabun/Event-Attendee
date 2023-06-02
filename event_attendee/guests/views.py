@@ -7,6 +7,7 @@ from .form import EntryForm, AdminForm
 from django.db.models.functions import Now
 import csv
 from .models import *
+from datetime import datetime
 
 # Views of Guest list
 def guests_list_view(request):
@@ -97,9 +98,8 @@ def check_validate(request):
 
                 # WRITE DATA TO UPCOMINGINPUT MODEL, STATUS=1 MEAN USER IS COMING TO THE EVENT
                 msg = messages.success(request,"You're invited! Data match in invitation list")
-                
-                UpcomingInput.objects.filter(phone_number = int(new_number)).update(status=1)
-                # UpcomingInput.objects.filter(phone_number = int(new_number)).update(timestamps = Now())
+                # UpcomingInput.objects.filter(phone_number = int(new_number)).update(status=1)
+                UpcomingInput.objects.filter(phone_number = int(new_number)).update(status=1, incoming_timestamps = datetime.now())
 
                 return render(request, 'access_granted.html', {"form": form, "data": data, "msg":msg})
             # HANDLE ERROR IF DATA DOESN'T EXIST
