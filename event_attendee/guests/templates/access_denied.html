@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block title %}Check-in{% endblock %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'client.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container h-100 d-flex justify-content-center">
+    <div class=" my-auto">
+      <!-- <h1 class="display-3">Hello, world!</h1> -->
+      <div class="card border my-5 rounded mx-5 ">
+          <div class="card-header l-bg-blue-dark align-items-center">
+              <h1 class="card-title mx-5 mt-2 align-items-center text-danger text-center">ACCESS DENIED</h1>
+        </div>
+        <!-- <span class="header-line gradient-color-1"></span> -->
+        <div class="card-body mx-5">
+            <form action="" method="post" enctype="multipart/form-data">
+                <!-- <input type="submit" value="Submit"> -->
+                <!-- {% for msg in msg %}
+                    {{msg.tags}}
+                {% endfor %} -->
+                {% bootstrap_form form %}
+                {% csrf_token %}  
+                <div class="row border-bottom">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" fill="currentColor" class="bi bi-x fas fa-camera fa-10x align-items-center text-danger" viewBox="0 0 16 16">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    <div class="d-flex justify-content-center align-items-center mt-3">
+                        <button type="submit" class="btn l-bg-blue-dark-reverse mt-1">Submit Again</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+ </div>
+{% endblock %}
